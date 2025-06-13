@@ -12,10 +12,8 @@ export default async function Layout({
 
   return (
     <section>
-      <MouseTrackingProvider userId={userId ?? ""}>
-        <Toaster richColors position="top-right" />
-        {children}
-      </MouseTrackingProvider>
+      <Toaster richColors position="top-right" />
+      {children}
     </section>
   );
 }
