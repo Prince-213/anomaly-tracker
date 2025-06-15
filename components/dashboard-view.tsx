@@ -1,42 +1,53 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { BarChart3, Clock, MousePointer } from "lucide-react"
-import Link from "next/link"
+import { useState } from "react";
+import { BarChart3, Clock, MousePointer } from "lucide-react";
+import Link from "next/link";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-import DashboardLayout from "./dashboard-layout"
-import UserHabitsChart from "./charts/user-habits-chart"
-import UserActivityLineChart from "./charts/user-activity-line-chart"
-import AnomalyDistributionPieChart from "./charts/anomaly-distribution-pie-chart"
+import DashboardLayout from "./dashboard-layout";
+import UserHabitsChart from "./charts/user-habits-chart";
+import UserActivityLineChart from "./charts/user-activity-line-chart";
+import AnomalyDistributionPieChart from "./charts/anomaly-distribution-pie-chart";
 
 // Mock data for demonstration
 
 export default function DashboardView({ users }: { users: User[] }) {
-  const [selectedTimeframe, setSelectedTimeframe] = useState("7d")
+  const [selectedTimeframe, setSelectedTimeframe] = useState("7d");
 
- const mockData = {
-   totalUsers: users.length,
-   activeUsers: users.filter((user) => user.habits !== undefined).length,
-   totalAnomalies: users.reduce(
-     (sum, user) => sum + (user.anomalies ? user.anomalies.length : 0),
-     0
-   ),
-   highSeverityAnomalies: users.reduce((sum, user) => {
-     return (
-       sum +
-       (user.anomalies
-         ? user.anomalies.filter((anomaly) => anomaly.severity === "high")
-             .length
-         : 0)
-     );
-   }, 0)
- };
-
+  const mockData = {
+    totalUsers: users.length,
+    activeUsers: users.filter((user) => user.habits !== undefined).length,
+    totalAnomalies: users.reduce(
+      (sum, user) => sum + (user.anomalies ? user.anomalies.length : 0),
+      0
+    ),
+    highSeverityAnomalies: users.reduce((sum, user) => {
+      return (
+        sum +
+        (user.anomalies
+          ? user.anomalies.filter((anomaly) => anomaly.severity === "high")
+              .length
+          : 0)
+      );
+    }, 0),
+  };
 
   return (
     <div className=" w-full ">
@@ -168,28 +179,12 @@ export default function DashboardView({ users }: { users: User[] }) {
             {[
               {
                 id: 1,
-                user: "john.doe@example.com",
+                user: "dinmah@gmail.com",
                 type: "pin-speed",
                 severity: "high",
                 time: "2 hours ago",
-                icon: <BarChart3 className="h-4 w-4" />
+                icon: <BarChart3 className="h-4 w-4" />,
               },
-              {
-                id: 2,
-                user: "alice.smith@example.com",
-                type: "page-dwell",
-                severity: "medium",
-                time: "5 hours ago",
-                icon: <Clock className="h-4 w-4" />
-              },
-              {
-                id: 3,
-                user: "bob.johnson@example.com",
-                type: "mouse-movements",
-                severity: "low",
-                time: "1 day ago",
-                icon: <MousePointer className="h-4 w-4" />
-              }
             ].map((anomaly) => (
               <div
                 key={anomaly.id}
